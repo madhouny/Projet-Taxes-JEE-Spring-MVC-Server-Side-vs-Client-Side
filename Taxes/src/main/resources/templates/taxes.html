@@ -13,13 +13,16 @@
 
 	<div layout:fragment="content" class="container">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Liste des entreprises</div>
+			<div class="panel-heading">Liste des taxes</div>
 			<div class="panel-body">
 
 				<div class="container">
-					<form th:action="@{/entreprises}" method="get">
+					<form th:action="@{/taxes}" method="get" id="myForm">
 
-						<label>Mot Clé:</label> <input type="text" name="motCle" />
+						<label>Entreprise:</label> 
+						<select name="code" onchange="document.getElementById('myForm').submit()">
+						<option th:each="e:${entreprise}" th:text="${e.nom}" 
+						th:value="${e.code}"></option></select>
 						<button type="submit" class="btn btn-primary">Check</button>
 
 					</form>
@@ -27,17 +30,18 @@
 				<table class="table">
 
 					<tr>
-						<th>Code</th>
-						<th>Nom</th>
-						<th>RaisonSociale</th>
-						<th>Email</th>
+						<th>ID</th>
+						<th>Type</th>
+						<th>Titre</th>
+						<th>Date</th>
+						<th>Montant</th>
 					</tr>
-					<tr th:each="e:${listEntreprise}">
-						<td th:text="${e.code}"></td>
-						<td th:text="${e.nom}"></td>
-						<td th:text="${e.raisonSociale}"></td>
-						<td th:text="${e.email}"></td>
-						<td><a th:href="@{/taxes(code=${e.code})}" th:text="Taxes"></a></td>
+					<tr th:each="t:${taxes}">
+						<td th:text="${t.id}"></td>
+						<td th:text="${t.class.simpleName}"></td>
+						<td th:text="${t.titre}"></td>
+						<td th:text="${t.dateTaxe}"></td>
+						<td th:text="${t.montant}"></td>
 					</tr>
 				</table>
 				<div>
@@ -49,7 +53,7 @@
 					</ul>
 				</div>
 			</div>
-
+ 
 		</div>
 
 	</div>
