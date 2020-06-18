@@ -20,6 +20,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 					<li><a th:href="@{/taxes}">Taxes</a></li>
 					<li><a th:href="@{/formEntreprise}">Saisie</a></li>
 					
+					
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">
+				<li><a th:href="@{/login?logout}" th:text="${#httpServletRequest.remoteUser}"></a></li>
 				</ul>
 				
 			</div>

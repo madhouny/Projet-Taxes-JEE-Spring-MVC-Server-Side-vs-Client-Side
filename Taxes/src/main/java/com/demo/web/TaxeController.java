@@ -1,5 +1,6 @@
 package com.demo.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -61,15 +62,19 @@ public class TaxeController {
 	}
 
 	@RequestMapping(value = "/taxes")
-	public String taxes(Model model, Long code) {
-		Entreprise e = new Entreprise();
-		e.setCode(code);
-		model.addAttribute("entreprise",entrepriseRepository.findAll());
-		model.addAttribute("taxes", taxeRepository.findByEntreprise(e));
+	public String taxes(Model model,
+			@RequestParam(name = "code", defaultValue = "0") Long code) {
+		model.addAttribute("entreprise", entrepriseRepository.findAll());
+		if (code == 0) {
+			model.addAttribute("taxes", new ArrayList<Taxe>());
+		} else {
+			Entreprise e = new Entreprise();
+			e.setCode(code);
+
+			model.addAttribute("taxes", taxeRepository.findByEntreprise(e));
+		}
 
 		return "taxes";
 	}
-	
-	 
 
 }

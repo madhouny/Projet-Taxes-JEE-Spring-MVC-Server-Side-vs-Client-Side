@@ -44,14 +44,7 @@
 						<td th:text="${t.montant}"></td>
 					</tr>
 				</table>
-				<div>
-					<ul class="nav nav-pills">
-						<li th:class="${i.index==pageCourante}?'active':''"
-							th:each="p,i:${pages}"><a
-							th:href="@{/entreprises(page=${i.index},motCle=${motCle})}"
-							th:text="${i.index}"></a></li>
-					</ul>
-				</div>
+				
 			</div>
  
 		</div>
